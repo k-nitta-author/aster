@@ -1,6 +1,5 @@
-Aster Source Code
-==
----
+ASTER
+=
 
-README IN PROGRESS
--
+Interactive Fiction Project; Monolithic Architecture; ExpressJS with PostGreSQL Backend
+

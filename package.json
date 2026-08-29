@@ -14,10 +14,14 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^17.4.2",
+    "drizzle-orm": "^1.0.0-rc.4",
     "express": "^5.2.1",
-    "multer": "^2.2.0"
+    "multer": "^2.2.0",
+    "pg": "^8.23.0"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.23.1",
+    "drizzle-kit": "^1.0.0-rc.4"
   }
 }
