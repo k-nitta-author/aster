@@ -1,7 +1,7 @@
 // the schema for this project
 import { configDotenv } from "dotenv";
 import { drizzle } from "drizzle-orm/node-postgres";
-import { integer, varchar, pgTable } from "drizzle-orm/pg-core";
+import { integer, varchar, pgTable, date } from "drizzle-orm/pg-core";
 
 configDotenv()
 
@@ -11,7 +11,7 @@ const db = drizzle(process.env.DATABASE_URL!)
 // create users role table
 export const userRoleTable = pgTable("user_role", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    name: varchar({length: 16})
+    name: varchar({length: 16}).notNull().unique()
 })
 
 // create tables
@@ -19,6 +19,9 @@ export const usersTable = pgTable("users", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     firstName: varchar({length: 20}).notNull(),
     lastName: varchar({length: 25}).notNull(),
+    userName: varchar({length: 25}).notNull().unique(),
+    passWord: varchar({length: 25}).notNull(),
+    joinDate: date(),
     about: varchar({length: 255}).notNull(),
     roleId: integer().references(() => userRoleTable.id) //  foreign key constraint; see user role
 })
@@ -33,7 +36,10 @@ export const newsPostAuthorShipTable = pgTable("news_post_authorship", {
 // create news post table
 export const newsPostTable = pgTable("news_post", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    name: varchar({length: 25}).notNull()
+    name: varchar({length: 25}).notNull().unique(),
+    body: varchar({length:1600}),
+    publishDate: date(),
+    editDate: date(),
 })
 
 // create pageAuthorship table
@@ -60,6 +66,8 @@ export const blogPostAuthorshipTable = pgTable("blog_post_authorship", {
 // create blog post table
 export const blogPostTable = pgTable("blog_post", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    title: varchar({length: 30}),
+    title: varchar({length: 30}).unique(),
+    publishDate: date(),
+    editDate: date(),
     body: varchar({length: 2000})
 })
