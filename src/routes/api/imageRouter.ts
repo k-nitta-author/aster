@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const imageRouter = Router()
 
-imageRouter.get("/", (req, res) => {
+imageRouter.get("/", async (req, res) => {
 
 })
 
