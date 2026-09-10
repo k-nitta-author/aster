@@ -2,6 +2,13 @@ import { eq } from "drizzle-orm";
 import { db, blogPostTable } from "../db/schema.ts";
 import { blogPost } from "../models/blogPost.ts";
 
+// find the newest blog post
+export const findNewest = async () => {
+    const blogPost = await db.select()
+    .from(blogPostTable)
+    .orderBy(blogPostTable.publishDate)
+    .limit(1)
+}
 
 // find all blog
 export const findAll = async () => {

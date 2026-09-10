@@ -2,6 +2,14 @@ import { eq } from "drizzle-orm";
 import { db, pageTable } from "../db/schema.ts";
 import { page } from "../models/page.ts";
 
+// find newest page
+export const findNewest = async () => {
+    const page = await db.select()
+    .from(pageTable)
+    .orderBy(pageTable.publishDate)
+    .limit(1)
+}
+
 // find all page
 export const findAll = async () => {
     const pages = await db.select().from(pageTable)

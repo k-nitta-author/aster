@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import { db, usersTable } from "../db/schema.ts";
 import { user } from "../models/user.ts";
 
-
 // find all users
 export const findAll = async () => {
     const users = await db.select().from(usersTable)
