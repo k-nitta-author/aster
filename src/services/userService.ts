@@ -4,7 +4,7 @@ import { user } from "../models/user.ts";
 
 
 // find all users
-export const findAll = async (req: Request, res: Response) => {
+export const findAll = async () => {
     const users = await db.select().from(usersTable)
 }
 

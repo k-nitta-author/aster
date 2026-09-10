@@ -6,7 +6,7 @@ import { integer, varchar, pgTable, date } from "drizzle-orm/pg-core";
 configDotenv()
 
 // connect to the db
-const db = drizzle(process.env.DATABASE_URL!)
+export const db = drizzle(process.env.DATABASE_URL!)
 
 // create users role table
 export const userRoleTable = pgTable("user_role", {
@@ -38,8 +38,8 @@ export const newsPostTable = pgTable("news_post", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     name: varchar({length: 25}).notNull().unique(),
     body: varchar({length:1600}),
-    publishDate: date(),
-    editDate: date(),
+    publishDate: date().defaultNow(),
+    editDate: date().defaultNow(),
 })
 
 // create pageAuthorship table
@@ -67,7 +67,7 @@ export const blogPostAuthorshipTable = pgTable("blog_post_authorship", {
 export const blogPostTable = pgTable("blog_post", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     title: varchar({length: 30}).unique(),
-    publishDate: date(),
-    editDate: date(),
+    publishDate: date().defaultNow(),
+    editDate: date().defaultNow(),
     body: varchar({length: 2000})
 })

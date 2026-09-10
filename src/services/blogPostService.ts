@@ -4,7 +4,7 @@ import { blogPost } from "../models/blogPost.ts";
 
 
 // find all blog
-export const findAll = async (req: Request, res: Response) => {
+export const findAll = async () => {
     const blogs = await db.select().from(blogPostTable)
 }
 

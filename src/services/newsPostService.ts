@@ -3,7 +3,7 @@ import { db, newsPostTable } from "../db/schema.ts";
 import { newsPost } from "../models/newsPost.ts";
 
 // find all newsposts
-export const findAll = async (req: Request, res: Response) => {
+export const findAll = async () => {
     const blogs = await db.select().from(newsPostTable)
 }
 
