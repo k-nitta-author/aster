@@ -53,7 +53,9 @@ export const pageAuthorshipTable = pgTable("page_authorship", {
 // create page table
 export const pageTable = pgTable("page", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    name: varchar({length: 25}).notNull()
+    name: varchar({length: 25}).notNull(),
+    publishDate: date().defaultNow(),
+    editDate: date().defaultNow(),
 })
 
 // blog post authorship table
