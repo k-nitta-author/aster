@@ -1,50 +1,34 @@
 import { Router } from "express";
-import { db, newsPostTable, usersTable } from "../../db/schema.ts";
-import { eq } from "drizzle-orm";
+import { create, deleteByID, findAll, findByID, updateByID } from "../../services/newsPostService.ts";
 
 const newsRouter = Router()
 
 newsRouter.get("/", (req, res) => {
-    const newsPosts = db.
-    select().
-    from(usersTable)
+    const newsPosts = findAll()
 
     res.status(200).json(newsPosts)
 })
 
 newsRouter.get("/:id", async (req, res) => {
-    const newsPost = await db
-    .select()
-    .from(newsPostTable)
-    .where(eq(newsPostTable.id, +req.params.id))
+    const newsPost = findByID(+req.params.id)
 
     res.status(200).json(newsPost)
 })
 
 newsRouter.post("/", async (req, res) => {
-    const newsPost = await db
-    .insert(newsPostTable)
-    .values(req.body)
-    .returning()
+    const newsPost = create(req.body)
 
     res.status(200).json(newsPost)
 })
 
 newsRouter.put("/:id", async (req, res) => {
-    const newsPost = await db
-    .update(newsPostTable)
-    .set({})
-    .where(eq(newsPostTable.id, +req.params.id))
-    .returning()
+    const newsPost = updateByID(+req.params.id, req.body)
 
     res.status(201).json(newsPost)
 })
 
 newsRouter.delete("/:id", async (req, res) => {
-    const newsPost = await db
-    .delete(newsPostTable)
-    .where(eq(newsPostTable.id, +req.params.id))
-    .returning()
+    const newsPost = deleteByID(+req.params.id)
 
     res.status(204).json(newsPost)
 })
