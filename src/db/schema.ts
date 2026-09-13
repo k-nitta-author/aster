@@ -58,6 +58,18 @@ export const pageTable = pgTable("page", {
     editDate: date().defaultNow(),
 })
 
+// page comment table
+export const pageCommentTable = pgTable("pageComment", {
+    userId: integer().references(() => usersTable.id),
+    blogPostId: integer().references(() => blogPostTable.id),
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    body: varchar({length: 255}).notNull(),
+    publishDate: date().defaultNow(),
+    editDate: date().defaultNow(),
+    upvoteNumber: integer(),
+    downvoteNumber: integer()
+})
+
 // blog post authorship table
 export const blogPostAuthorshipTable = pgTable("blog_post_authorship", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -73,3 +85,4 @@ export const blogPostTable = pgTable("blog_post", {
     editDate: date().defaultNow(),
     body: varchar({length: 2000})
 })
+
